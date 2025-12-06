@@ -19,50 +19,50 @@ O projeto não contém a chave de API no código-fonte por segurança. Para roda
 
 ### 📐 Diagrama de Classes
 Abaixo está a representação da arquitetura do projeto, demonstrando o uso de Interfaces, Implementação Concreta e Composição.
-   
-   
-      classDiagram
+## 📐 Diagrama de Classes
+
+```mermaid
+classDiagram
     class ChefAlApp {
         +main(args)
         -cadastrarIngredientes()
         -buscarReceitas()
     }
-
+    
     class SugestorReceitas {
         <<interface>>
         +sugerir(ingredientes, filtros) List~Receita~
     }
-
+    
     class SugestorChefAl {
         -apiClient : OpenAiApiClient
         +sugerir()
         -construirPromptJson()
         -parsearResposta()
     }
-
+    
     class OpenAiApiClient {
         -apiKey : String
         +obterSugestoes(json) String
     }
-
+    
     class Receita {
         -nome : String
         -tempoPreparo : int
         -modoPreparo : String
         +getNome()
     }
-
+    
     class Ingrediente {
         -nome : String
         -quantidade : String
     }
-
+    
     ChefAlApp ..> SugestorReceitas : usa (Polimorfismo)
     SugestorChefAl ..|> SugestorReceitas : implementa
     SugestorChefAl --> OpenAiApiClient : usa (Associação)
     SugestorChefAl ..> Receita : cria
     Receita *-- Ingrediente : contem (Composição)
-
 ### 💻 Exemplo de Uso
 Ao executar o programa, o fluxo esperado no console é:
 --- Bem-vindo ao ChefAl ---
@@ -92,3 +92,4 @@ MODO DE PREPARO:
 2. Adicione o queijo e o sal.
 
 3. Frite em fogo médio.
+
