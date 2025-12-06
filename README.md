@@ -19,7 +19,9 @@ O projeto não contém a chave de API no código-fonte por segurança. Para roda
 
 ### 📐 Diagrama de Classes
 Abaixo está a representação da arquitetura do projeto, demonstrando o uso de Interfaces, Implementação Concreta e Composição.
-classDiagram
+   
+   
+      classDiagram
     class ChefAlApp {
         +main(args)
         -cadastrarIngredientes()
@@ -88,4 +90,5 @@ INGREDIENTES:
 MODO DE PREPARO:
 1. Bata os ovos.
 2. Adicione o queijo e o sal.
+
 3. Frite em fogo médio.
