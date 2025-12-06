@@ -18,3 +18,97 @@ O projeto não contém a chave de API no código-fonte por segurança. Para roda
    API_KEY=sk-proj-sua-chave-aqui...
 
 
+```mermaid
+   classDiagram
+    class ChefAlApp {
+        +main(args)
+        -cadastrarIngredientes()
+        -buscarReceitas()
+    }
+
+    class Usuario {
+        -ingredientesDisponiveis : List~Ingrediente~
+        +adicionarIngrediente(ing)
+        +getIngredientesDisponiveis()
+    }
+
+    class SugestorReceitas {
+        <<interface>>
+        +sugerir(ingredientes, filtros) List~Receita~
+    }
+
+    class SugestorChefAl {
+        -apiClient : OpenAiApiClient
+        +sugerir()
+        -construirPromptJson()
+        -parsearResposta()
+    }
+
+    class ConfigLoader {
+        -properties : Properties
+        +getApiKey() String
+    }
+
+    class OpenAiApiClient {
+        -apiKey : String
+        +obterSugestoes(json) String
+    }
+
+    class Receita {
+        -nome : String
+        -tempoPreparo : int
+        -modoPreparo : String
+        +getNome()
+    }
+
+    class Ingrediente {
+        -nome : String
+        -quantidade : String
+    }
+
+    %% Relações e Dependências
+    ChefAlApp --> Usuario : cria
+    ChefAlApp ..> SugestorReceitas : usa (Polimorfismo)
+    
+    Usuario o-- Ingrediente : agrega
+    
+    SugestorChefAl ..|> SugestorReceitas : implementa
+    SugestorChefAl --> OpenAiApiClient : usa
+    SugestorChefAl ..> ConfigLoader : usa (para pegar chave)
+    SugestorChefAl ..> Receita : cria
+    
+    Receita *-- Ingrediente : compõe
+    ```
+```
+``
+   ### --- Bem-vindo ao ChefAl ---
+   1. Cadastrar ingredientes
+   2. Buscar Receitas
+   3. Sair
+```
+   > Escolha: 1
+   Nome do ingrediente: Ovo
+   Quantidade: 2 unidades
+   Nome do ingrediente: Queijo
+   Quantidade: 100g
+   Nome do ingrediente: fim
+```
+```
+   > Escolha: 2
+   [ChefAl]: Consultando a inteligência artificial...
+```
+```   
+   --- RECEITAS SUGERIDAS ---
+   RECEITA 1: OMELETE DE QUEIJO
+      TEMPO: 10 minutos
+      INGREDIENTES:
+      - Ovo (2 unidades) (Você tem!)
+      - Queijo (100g) (Você tem!)
+      - Sal (a gosto)
+```
+```
+   MODO DE PREPARO:
+   1. Bata os ovos.
+   2. Adicione o queijo e o sal.
+   3. Frite em fogo médio.
+```
