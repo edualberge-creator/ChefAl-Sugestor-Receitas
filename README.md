@@ -17,7 +17,7 @@ O projeto não contém a chave de API no código-fonte por segurança. Para roda
    ```properties
    API_KEY=sk-proj-sua-chave-aqui...
 
-
+### Diagrama de Classes: 
 ```mermaid
    classDiagram
     class ChefAlApp {
@@ -80,7 +80,7 @@ O projeto não contém a chave de API no código-fonte por segurança. Para roda
     Receita *-- Ingrediente : compõe
     ```
 ```
-``
+### Exemplo de Uso:
    ### --- Bem-vindo ao ChefAl ---
    1. Cadastrar ingredientes
    2. Buscar Receitas
@@ -112,3 +112,4 @@ O projeto não contém a chave de API no código-fonte por segurança. Para roda
    2. Adicione o queijo e o sal.
    3. Frite em fogo médio.
 ```
+
